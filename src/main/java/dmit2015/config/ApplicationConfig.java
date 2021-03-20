@@ -4,6 +4,14 @@ import javax.annotation.sql.DataSourceDefinition;
 import javax.annotation.sql.DataSourceDefinitions;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
+import javax.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
+
+@DatabaseIdentityStoreDefinition(
+        dataSourceLookup = "java:app/datasources/h2databaseDS",
+        callerQuery = "SELECT password FROM CallerUser WHERE username = ?",
+        groupsQuery = "SELECT groupname FROM CallerGroup WHERE username = ?",
+        priority = 5
+)
 
 @DataSourceDefinitions({
     @DataSourceDefinition(
