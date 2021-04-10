@@ -1,9 +1,9 @@
 /**
- * curl -i -X GET http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/helloworld -H 'Accept: text/plain'
+ * curl -i -X GET http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/helloworld -H 'Accept: text/plain'
  *
- * curl -i -X GET http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/helloworld -H 'Accept: text/html'
+ * curl -i -X GET http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/helloworld -H 'Accept: text/html'
  *
- * curl -i -X GET http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/helloworld -H 'Accept: application/json'
+ * curl -i -X GET http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/helloworld -H 'Accept: application/json'
  *
  */
 package dmit2015.resource;

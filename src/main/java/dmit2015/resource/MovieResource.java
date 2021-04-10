@@ -1,24 +1,24 @@
 /**
  *
- * curl -v -X GET http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/movies
+ * curl -v -X GET http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/movies
  *
- * curl -v -X GET http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/movies/3
+ * curl -v -X GET http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/movies/3
  *
- curl -i -X POST http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/movies \
+ curl -i -X POST http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/movies \
  -d '{"genre":"Horror","price":29.99,"rating":"PG","releaseDate":"2021-01-01","title":"COVID19 Horror Stories"}' \
  -H 'Content-Type:application/json'
 
- curl -v -X GET http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/movies/5
+ curl -v -X GET http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/movies/5
 
-curl -i -X PUT http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/movies/5 \
+curl -i -X PUT http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/movies/5 \
  -d '{"id":5, "genre":"Horror","price":19.99,"rating":"PG","releaseDate":"2021-01-01","title":"COVID19 Happy Stories"}' \
  -H 'Content-Type:application/json'
 
- curl -v -X GET http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/movies/5
+ curl -v -X GET http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/movies/5
 
- curl -v -X DELETE http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/movies/5
+ curl -v -X DELETE http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/movies/5
 
- curl -v -X GET http://localhost:8080/dmit2015-instructor-jaxrs-demo/webapi/movies/5
+ curl -v -X GET http://localhost:8080/dmit2015-security-microservices-demo-start/webapi/movies/5
 
  */
 package dmit2015.resource;
