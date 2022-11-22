@@ -6,6 +6,8 @@ import dmit2015.entity.TodoItem;
 import dmit2015.repository.TodoItemRepository;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -20,8 +22,6 @@ import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;

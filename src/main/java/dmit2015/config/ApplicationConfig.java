@@ -1,10 +1,10 @@
 package dmit2015.config;
 
-import javax.annotation.sql.DataSourceDefinition;
-import javax.annotation.sql.DataSourceDefinitions;
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.annotation.FacesConfig;
-import javax.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
+import jakarta.annotation.sql.DataSourceDefinition;
+import jakarta.annotation.sql.DataSourceDefinitions;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.annotation.FacesConfig;
+import jakarta.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
 
 @DatabaseIdentityStoreDefinition(
         dataSourceLookup = "java:app/datasources/h2databaseDS",

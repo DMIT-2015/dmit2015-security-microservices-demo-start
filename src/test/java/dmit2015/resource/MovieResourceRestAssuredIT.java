@@ -1,37 +1,23 @@
 package dmit2015.resource;
 
-import dmit2015.entity.TodoItem;
+import dmit2015.entity.Movie;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 import org.junit.jupiter.api.*;
-import org.microshed.testing.jupiter.MicroShedTest;
-import org.microshed.testing.testcontainers.ApplicationContainer;
-import org.testcontainers.junit.jupiter.Container;
 
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * https://github.com/rest-assured/rest-assured
- * https://github.com/rest-assured/rest-assured/wiki/Usage
- * http://www.mastertheboss.com/jboss-frameworks/resteasy/restassured-tutorial
- * http://json-b.net/docs/user-guide.html
- */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@MicroShedTest
-public class TodoItemResourceMicroshedIT {
-
-    @Container
-    public static ApplicationContainer app = new ApplicationContainer()
-            .withAppContextRoot("/dmit2015-instructor-jaxrs-demo")
-            .withReadinessPath("/dmit2015-instructor-jaxrs-demo/webapi/TodoItems");
-
+public class MovieResourceRestAssuredIT {
 
     String testDataResourceLocation;
 
@@ -41,7 +27,7 @@ public class TodoItemResourceMicroshedIT {
         Response response = given()
                 .accept(ContentType.JSON)
                 .when()
-                .get("/webapi/TodoItems")
+                .get("/webapi/movies")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
@@ -51,34 +37,29 @@ public class TodoItemResourceMicroshedIT {
 
         // Create a new Jsonb instance using the default JsonbBuilder implementation
         Jsonb jsonb = JsonbBuilder.create();
-        List<TodoItem> todos = jsonb.fromJson(jsonBody, new ArrayList<TodoItem>(){}.getClass().getGenericSuperclass());
-        assertEquals(3, todos.size());
-        TodoItem firstTodoItem = todos.get(0);
-        assertEquals("Todo 1", firstTodoItem.getName());
-        assertFalse(firstTodoItem.isComplete());
-
-        TodoItem lastTodoItem = todos.get(todos.size() - 1);
-        assertEquals("Todo 3", lastTodoItem.getName());
-        assertFalse(lastTodoItem.isComplete());
-
+        List<Movie> todos = jsonb.fromJson(jsonBody, new ArrayList<Movie>(){}.getClass().getGenericSuperclass());
+        assertEquals(4, todos.size());
     }
 
     @Order(2)
     @Test
     void shouldCreate() {
-        TodoItem newTodoItem = new TodoItem();
-        newTodoItem.setName("Create REST Assured Integration Test");
-        newTodoItem.setComplete(false);
+        Movie currentMovie = new Movie();
+        currentMovie.setGenre("Horror");
+        currentMovie.setPrice(BigDecimal.valueOf(19.99));
+        currentMovie.setRating("NC-17");
+        currentMovie.setTitle("The Return of the Java Master");
+        currentMovie.setReleaseDate(LocalDate.parse("2021-01-21"));
 
         // Create a new Jsonb instance using the default JsonbBuilder implementation
         Jsonb jsonb = JsonbBuilder.create();
-        String jsonBody = jsonb.toJson(newTodoItem);
+        String jsonBody = jsonb.toJson(currentMovie);
 
         Response response = given()
                 .contentType(ContentType.JSON)
                 .body(jsonBody)
                 .when()
-                .post("/webapi/TodoItems")
+                .post("/webapi/movies")
                 .then()
                 .statusCode(201)
                 .extract()
@@ -101,10 +82,13 @@ public class TodoItemResourceMicroshedIT {
         String jsonBody = response.getBody().asString();
         // Create a new Jsonb instance using the default JsonbBuilder implementation
         Jsonb jsonb = JsonbBuilder.create();
-        TodoItem existingTodoItem = jsonb.fromJson(jsonBody, TodoItem.class);
-        assertNotNull(existingTodoItem);
-        assertEquals("Create REST Assured Integration Test", existingTodoItem.getName());
-        assertFalse(existingTodoItem.isComplete());
+        Movie existingMovie = jsonb.fromJson(jsonBody, Movie.class);
+        assertNotNull(existingMovie);
+        assertEquals("The Return of the Java Master", existingMovie.getTitle());
+        assertEquals("Horror", existingMovie.getGenre());
+        assertEquals(19.99, existingMovie.getPrice().doubleValue());
+        assertEquals("NC-17", existingMovie.getRating());
+        assertEquals(LocalDate.parse("2021-01-21").toString(), existingMovie.getReleaseDate().toString());
     }
 
     @Order(4)
@@ -123,12 +107,13 @@ public class TodoItemResourceMicroshedIT {
         // http://json-b.net/docs/user-guide.html
         // Create a new Jsonb instance using the default JsonbBuilder implementation
         Jsonb jsonb = JsonbBuilder.create();
-        TodoItem existingTodoItem = jsonb.fromJson(jsonBody, TodoItem.class);
-        assertNotNull(existingTodoItem);
-        existingTodoItem.setName("Updated Name");
-        existingTodoItem.setComplete(true);
+        Movie existingMovie = jsonb.fromJson(jsonBody, Movie.class);
+        assertNotNull(existingMovie);
+        existingMovie.setTitle("Ghostbusters 2016");
+        existingMovie.setPrice(BigDecimal.valueOf(16.99));
+        existingMovie.setReleaseDate(LocalDate.parse("2016-07-15"));
 
-        String jsonRequestBody = jsonb.toJson(existingTodoItem);
+        String jsonRequestBody = jsonb.toJson(existingMovie);
         given()
                 .contentType(ContentType.JSON)
                 .body(jsonRequestBody)
@@ -148,6 +133,4 @@ public class TodoItemResourceMicroshedIT {
                 .then()
                 .statusCode(204);
     }
-
 }
-

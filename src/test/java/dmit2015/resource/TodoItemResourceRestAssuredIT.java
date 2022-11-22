@@ -3,10 +3,10 @@ package dmit2015.resource;
 import dmit2015.entity.TodoItem;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 import org.junit.jupiter.api.*;
 
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
 import java.util.ArrayList;
 import java.util.List;
 

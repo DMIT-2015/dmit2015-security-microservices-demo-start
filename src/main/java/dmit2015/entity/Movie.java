@@ -1,9 +1,10 @@
 package dmit2015.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
